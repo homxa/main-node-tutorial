@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocomplete Example</title>
+    <style>
+        /* Basic styling for suggestions box */
+        .suggestions {
+            border: 1px solid #ccc;
+            max-width: 200px;
+            margin-top: 5px;
+        }
+        .suggestion {
+            padding: 5px;
+            cursor: pointer;
+        }
+        .suggestion:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="searchBox" placeholder="Type something..." />
+    <div id="suggestions" class="suggestions"></div>
+
+
+
+
+<form action="/login" method="post">
+
+<input placeholder="name" name="name" autocomplete="false"/>
+<button>Submit</button>
+
+</form>
+
+
+
+
+
+
+
+
+    <script>
+        const searchBox = document.getElementById('searchBox');
+        const suggestionsBox = document.getElementById('suggestions');
+        const data = ['apple', 'banana', 'orange', 'mango', 'grape', 'pineapple', 'watermelon','yam'];
+
+        searchBox.addEventListener('input', () => {
+            const query = searchBox.value.toLowerCase();
+            suggestionsBox.innerHTML = '';
+
+            if (query) {
+                const filteredData = data.filter(item => item.toLowerCase().includes(query));
+                filteredData.forEach(item => {
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.textContent = item;
+                    suggestionItem.classList.add('suggestion');
+                    suggestionItem.addEventListener('click', () => {
+                        searchBox.value = item;
+                        suggestionsBox.innerHTML = '';
+                    });
+                    suggestionsBox.appendChild(suggestionItem);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
